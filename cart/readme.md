@@ -1,7 +1,7 @@
-#Shopping Cart and Checkout Example
+# Shopping Cart and Checkout Example
 
-###Inside this folder contains the working files needed to replicate the shopping cart and checkout feature I wrote for my website. [www.jondstone.com](https://www.jondstone.com)
-###Each file will a comment block in the header detailing how the code works.
+### Inside this folder contains the working files needed to replicate the shopping cart and checkout feature I wrote for my website. [www.jondstone.com](https://www.jondstone.com)
+### Each file will a comment block in the header detailing how the code works.
 * cart.css (This file contains the CSS needed to stylize the "add to cart" button feature and "shopping cart" page.)
 * cart.php (The shopping cart checkout page, this contains JavaScript and HTML showing how the cart works.)
 * charge.php (The main PHP code that calls Stripe's API and creates the check-out.)

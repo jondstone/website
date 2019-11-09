@@ -1,6 +1,6 @@
-#This repo contains selected code from my website
+# This repo contains selected code from my website
 
-###Each Folder will contain a sub-project, with more to be added in the future.
+### Each Folder will contain a sub-project, with more to be added in the future.
 * Cart (This folder contains code I've written for a custom built shopping cart and checkout feature.)
 * Misc (This folder contains misc. coding examples for my website.)
 
@@ -12,7 +12,7 @@ When I originally built my website in 2011, each page had a PayPal "add to cart"
 
 Elsewhere, all data input is santized before being passed on. I've added protection against XSS and other malicious attacks to my security headers. Also, I have added Google Analytics to the site. All new features that my existing websites never had.
 
-###To Do:
+### To Do:
 * Add a database in MySQL for each Gallery (i.e. Best Sellers, Landscapes, Wildlife, etc.). This database will store all the unique pages in that gallery.
 * Then implement a previous/next button on each individual page inside of that gallery. This will allow the user to traverse through all the images
 * Show a count (i.e. 4/26) at the bottom so they know how many images are inside this gallery and which one they are currently viewing
