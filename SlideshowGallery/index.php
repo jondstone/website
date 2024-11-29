@@ -1,6 +1,13 @@
 ﻿<!DOCTYPE html>
 <html lang="en-US">
 <head>
+	<!-- 
+	Wrote JS to display a slideshow on my homepage and elsewhere.
+	All photos except for the first are hidden; and then as each image displays 
+	in the slideshow, there is a smooth fade transition.
+	Set timers as variables so it is easy to change.
+	Code can handle a multitude of images. 
+	-->
     <!-- Header content removed as it's not necessary to be displayed in Git. -->
 </head>
 
