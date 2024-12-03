@@ -3,6 +3,7 @@
 ### Each Folder will contain a sub-project, with more to be added in the future.
 * Cart (This folder contains code I've written for a custom built shopping cart and checkout feature.)
 * ContactForm (Folder contains PHP and JS code for the Contact Form and Validation)
+* MiniGallery (Folder contains PHP and JS code for MiniGallery used on the Real Estate and Weddings pages)
 * Misc (Folder contains Misc. PHP and JS code used throughout my website)
 
 Starting in late 2018 through early 2019 I completed an overhaul on my website, where I combined two of my older sites (Jon Stone Photography and Forgotten Southeast) into one. This website was built and coded entirely by hand, with no templates being used. 
