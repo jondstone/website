@@ -16,8 +16,6 @@
         Javascript is currently disabled. This site requires Javascript to be enabled.
     </noscript>
 
-	<?php include "./../scripts/header.txt" ?>
-
 	<div id="content">
 		<br />
  		<!-- Contact Page content removed as it's not necessary to be displayed in Git.-->
