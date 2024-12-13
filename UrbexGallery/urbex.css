@@ -1,0 +1,257 @@
+/*--------------------------------------------------
+					GALLERY SECTION
+---------------------------------------------------*/
+.urbexGallery-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.urbexGallery {
+    background: #444 url(/images/urbexgallery/pattern.png) repeat top left;
+    position: relative;
+    background-color: #222;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    display: flex; /* Use flexbox */
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+    height: 540px; /* Fixed height for the gallery */
+    overflow: hidden; /* Ensure content doesn't overflow */
+}
+.urbexGallery img {
+    max-height: 100%; /* Ensures the image scales proportionally */
+    max-width: 100%; 
+    object-fit: contain; /* Maintain aspect ratio without cropping */
+    border-radius: 10px;
+    max-width: 100%; /* Ensures the image doesn't overflow its container */
+}
+/************** Thumbnail container **************/
+.thumbnail-container {
+    position: relative;
+    display: flex;
+    justify-content: center; /* Centers the entire thumbnail strip */
+    align-items: center;
+    margin-bottom: 20px;
+    user-select: none; /* Prevent text selection */
+}
+.thumbnail-strip {
+    display: flex;
+    justify-content: space-between; /* Even space between images */
+    align-items: center;
+    padding: 3px;
+    background-color: #444;
+    border-radius: 10px;
+    width: 100%;
+    position: relative; /* Allow positioning of arrows inside */
+    overflow: hidden;
+    padding-left: 15px;
+    padding-right: 15px;
+    transition: transform 0.5s ease; 
+}
+.thumbnail-strip img {
+    flex-shrink: 0; /* Prevent thumbnails from shrinking */
+    width: 65px;
+    height: 65px;
+    margin: 0px;
+    border-radius: 5px;
+    cursor: pointer;
+    object-fit: cover;
+    object-position: center;
+}
+.thumbnail-strip img.active {
+    border: 2px solid white;
+}
+/************** Thumbnail Arrow **************/
+.arrow-thumbnail {
+    position: absolute;
+    width: 14px;
+    height: 25px;
+    cursor: pointer;
+    background: url(/images/urbexgallery/nav_thumbs.png) no-repeat;
+    background-size: 28px 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+.arrow-thumbnail.left {
+    left: 1px;
+    background-position: 0 0;
+}
+.arrow-thumbnail.right {
+    right: 1px;
+    background-position: -14px 0;
+}
+.arrow-thumbnail.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+}
+.arrow-thumbnail:hover {
+    opacity: 0.8;
+}
+/************** Gallery Arrow **************/
+.arrow-container {
+    position: absolute;
+    top: 0;
+    bottom: 0; /* Stretch to the full height of the container */
+    width: 40px; 
+    background-color: rgba(50, 50, 50, 0.4); 
+    transition: background-color 0.3s; 
+    z-index: 10; /* Ensure it's above other elements */
+    cursor: pointer; /* Make the container clickable */
+    display: flex;
+    justify-content: center; /* Centers the arrows horizontally */
+    align-items: center; /* Centers the arrows vertically */
+}
+.arrow-container:hover {
+    background-color: rgba(50, 50, 50, 0.7); /* Less transparent on hover */
+}
+.left-arrow-container {
+    left: 0;
+}
+.right-arrow-container {
+    right: 0;
+}
+.arrow {
+    position: relative;
+    width: 20px;  
+    height: 22px; 
+    background: url(/images/urbexgallery/nav.png) no-repeat;
+    background-size: 40px 22px; /* Ensure the image is displayed at the right size */
+    z-index: 11; /* Arrow is above the strip */
+    transition: opacity 0.3s; 
+    opacity: 0.3;
+}
+.arrow.left {
+    background-position: 0 0;  /* Left half of nav.png */
+}
+.arrow.right {
+    background-position: -20px 0;  /* Right half of nav.png */
+}
+.arrow-container:hover .arrow {
+    opacity: 1; 
+}
+/************** Description text styling **************/
+.description {
+    position: absolute; 
+    bottom: 5px; 
+    left: 50%; 
+    transform: translateX(-50%); /* Center align the text */
+    color: #fff;
+    user-select: none; 
+    font-family: Oswald, sans-serif;
+    text-transform: uppercase;
+    white-space: nowrap; 
+    font-size: 14px; 
+}
+.urbexGallery.portrait .description {
+    bottom: 1px; 
+}
+/************** Mobile and tablet responsiveness **************/
+@media (max-width: 768px) { /* Tablet */
+    .urbexGallery-container {
+        width: 90%;
+    }
+    .urbexGallery img {
+        max-height: 300px; /* Limit image height for tablets */
+    }
+    .thumbnail-strip img {
+        width: 55px;
+        height: 55px;
+    }
+    .arrow-thumbnail {
+        width: 18px;
+        height: 30px;
+    }
+    .arrow-thumbnail.left {
+        left: 10px;
+    }
+    .arrow-thumbnail.right {
+        right: 10px;
+    }
+    .arrow-container {
+        width: 25px; 
+    }
+    .arrow {
+        width: 22px;  
+        height: 24px; 
+    }
+    .description {
+        font-size: 14px;
+    }
+}
+/* Mobile-only styling */
+@media (max-width: 480px) { 
+    .urbexGallery-container {
+        width: 95%;
+    }
+    .urbexGallery img {
+        max-height: 250px; /* Limit image height for mobile */
+    }
+    /* Reduce the maximum width of landscape images by 20% */
+    .urbexGallery img {
+        max-width: 80%; /* 20% smaller for landscape images */
+    }
+    .thumbnail-strip {
+        display: flex;
+        justify-content: center; 
+        align-items: center;
+        padding: 3px; 
+        background-color: #444;
+        border-radius: 10px;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+    .thumbnail-strip img {
+        flex-shrink: 0; /* Prevent shrinking */
+        width: 45px; 
+        height: 45px; 
+        margin: 0 5px; 
+        border-radius: 5px;
+        cursor: pointer;
+        object-fit: cover;
+        object-position: 0% 0%;
+    }
+    .arrow-thumbnail {
+        width: 16px;  
+        height: 25px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%); 
+        cursor: pointer;
+        z-index: 10;
+    }
+    /* Adjust left arrow to be closer to the left side */
+    .arrow-thumbnail.left {
+        left: 5px;
+        background-position: 0 0;
+    }
+    /* Adjust right arrow to be closer to the right side */
+    .arrow-thumbnail.right {
+        right: 5px;
+        background-position: -16px 0;
+    }
+    .arrow-thumbnail.disabled {
+        opacity: 0.3;
+        pointer-events: none;
+    }
+    .arrow-thumbnail:hover {
+        opacity: 0.8;
+    }
+}
+/* Landscape orientation fix */
+@media (max-width: 480px) and (orientation: landscape) {
+    .thumbnail-strip {
+        justify-content: flex-start; /* Align thumbnails to the left to avoid overflow */
+        overflow-x: auto; /* Allow horizontal scrolling if needed */
+    }
+    .thumbnail-strip img {
+        width: 40px; 
+        height: 40px; /
+    }
+    .arrow-thumbnail {
+        width: 18px; 
+        height: 28px;
+    }
+}
