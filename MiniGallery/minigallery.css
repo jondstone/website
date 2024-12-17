@@ -3,7 +3,6 @@
 	margin: 0 auto;
 	padding: 20px;
 }
-/* Gallery Layout */
 .miniGalleryContainer .miniGallery {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
@@ -17,10 +16,9 @@
 	transition: transform 0.3s ease, filter 0.3s ease;
 }
 .miniGalleryContainer .miniGallery img:hover {
-	transform: scale(1.05); /* Zoom effect */
+	transform: scale(1.05); 
 	filter: brightness(80%);
 }
-/* Modal Styles */
 .miniGalleryContainer .modal {
 	display: none;
 	position: fixed;
@@ -37,17 +35,17 @@
 .miniGalleryContainer .modal.active {
 	display: flex;
 }
-/* Modal Content */
+/************** Modal Content **************/
 .miniGalleryContainer .modalContent {
 	position: relative;
-	max-width: 90%; /* Prevents the modal content from getting too wide */
-	max-height: 90%; /* Prevents the modal content from getting too tall */
+	max-width: 90%; /* Prevents content from getting too wide */
+	max-height: 90%; /* Prevents content from getting too tall */
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	overflow: hidden;
 }
-/* Image Styling in Modal */
+/************** Image Styling in Modal **************/
 .miniGalleryContainer .modal img {
 	width: auto;
 	height: auto;
@@ -55,7 +53,7 @@
 	max-height: 100%; /* Ensure image is contained within modal */
 	object-fit: contain; /* Preserve aspect ratio without stretching */
 }
-/* Description Box */
+/************** Description **************/
 .miniGalleryContainer .description {
 	position: absolute;
 	font-family: Oswald;
@@ -69,7 +67,7 @@
 	font-size: 12px;
 	box-sizing: border-box;
 }
-/* Controls (Left/Right Arrows) */
+/*************** Left/Right Arrows **************/
 .miniGalleryContainer .control {
 	position: absolute;
 	top: 50%;
@@ -92,7 +90,7 @@
 .miniGalleryContainer .control:hover {
 	opacity: 1;
 }
-/* Close Button */
+/*************** Close Button **************/
 .miniGalleryContainer .close {
 	position: absolute;
 	top: 10px;
@@ -104,7 +102,7 @@
 	width: auto;
 	height: auto;
 }
-/* For Tablets (Portrait and Landscape) */
+/************** For Tablets (Portrait and Landscape) **************/
 @media (max-width: 768px) {
 	.miniGalleryContainer .miniGallery {
 		grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
@@ -114,7 +112,7 @@
 		height: 120px; /* Adjust image height for smaller screens */
 	}
 }
-/* For Cellphones */
+/************** For Mobile Devices **************/
 @media (max-width: 480px) {
 	.miniGalleryContainer .miniGallery {
 		grid-template-columns: 1fr; /* Single column for mobile phones */
