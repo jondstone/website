@@ -43,7 +43,7 @@ Starting in late 2018 through early 2019, I undertook a complete overhaul of my 
 - **Data Sanitization**: All user input is sanitized before processing to protect against XSS and other malicious attacks.
 - **Security Enhancements**: Implemented robust security headers for additional protection.
 - **Google Analytics**: Added to provide insights into website usage and user behavior.
----
+
 This overhaul has resulted in a faster, more secure, and feature-rich platform that is easier to maintain and provides a better user experience. All of these enhancements were designed and implemented with the goal of creating a modern, functional website while retaining full control over its features and design.
 
 ---------------------------------------
