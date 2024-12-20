@@ -5,6 +5,7 @@
 * ContactForm (Folder contains PHP and JS code for the Contact Form and Validation)
 * MiniGallery (Folder contains PHP and JS code for MiniGallery used on the Real Estate and Weddings pages)
 * Misc (Folder contains Misc. PHP and JS code used throughout my website)
+* PhotoGallery (contains PHP, JS and CSS code for the Photo Gallery portion of my website)
 * UrbexGallery (Folder contains PHP and JS code for the Gallery used throughout the Urban Exploration pages)
 
 Starting in late 2018 through early 2019 I completed an overhaul on my website, where I combined two of my older sites (Jon Stone Photography and Forgotten Southeast) into one. This website was built and coded entirely by hand, with no templates being used. 

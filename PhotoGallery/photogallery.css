@@ -1,0 +1,319 @@
+#individualGalleryPageContent {
+	width: 960px;
+	margin: 5px auto;
+}
+.galleryTableItem {
+    margin: 0;           
+    padding: 0;    
+    position: relative;      
+}
+.galleryTableItem h1 {
+    margin: 0;           
+    letter-spacing: -.5px;
+    font-size: 30px;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 5px rgba(68, 68, 68, 0.3);
+    background: linear-gradient(90deg, #444, rgb(94, 0, 14));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.galleryTableItem h5{
+    letter-spacing: -0.5px;
+    font-size: 16px;
+    font-family: 'Oswald', sans-serif;
+    color: rgb(94, 0, 14);
+    text-align: center;
+    font-weight: normal;
+}
+.galleryTableItem p{
+    margin-top: 5px;
+    letter-spacing: -1px;
+    font-size: 16px;
+    color: #444;
+    font-family: sans-serif;
+}
+.galleryTableItem a img {
+    transition: transform 0.3s ease, opacity 0.3s ease; 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.galleryTableItem a img:hover {
+    transform: scale(1.05);
+    filter: brightness(0.85); 
+}
+.galleryPhotoHoverText {
+    font-size: 24px;
+    font-weight: lighter;
+	font-family: 'Oswald';
+    position: absolute;
+    inset: 0;
+    color: #fff;
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none; /* Ensures the hover effect still works on the image */
+}
+.galleryTableItem:hover .galleryPhotoHoverText {
+    visibility: visible; 
+}
+.imageDesc {
+    margin-left: 5px;
+    margin-top: 5px;
+}
+.imagePortraitDesc {
+    margin-left: 85px;
+    margin-top: 10px;
+}
+.imageLocation{
+    letter-spacing: -1px;
+	font-size: 18px;
+    font-weight: bold;
+	font-family: 'Oswald';
+	color: rgb(94,0,14);
+    display: inline;
+    padding-left: 2px;
+}
+.editionType{
+    letter-spacing: -1px;
+	font-size: 16px;
+	font-family: 'Oswald';
+	color: #6A4E19;
+    display: inline;
+    padding-left: 2px;
+}
+/******* Individual Gallery Pages *******/
+#individualGalleryPageContent {
+	width: 960px;
+	margin: 5px auto;
+}
+#galleryNavLinks {
+    overflow: visible;
+}
+#galleryNavLinks h1{
+    text-align: left;
+    font-size: 14px;
+    font-family: 'Oswald', sans-serif;
+	color: #444;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+}
+#galleryNavLinks h1 span {
+    margin: 0 5px;
+    color: #444; 
+}
+#galleryNavLinks h1 a {
+    text-decoration: underline;
+	color: rgb(94,0,14);
+    display: inline-block;
+    position: relative;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+#galleryNavLinks h1 a:hover {
+    transform: scale(1.1);
+    color: rgb(24, 90, 109);
+    z-index: 2;
+}
+#individualGalleryPageContent h2 {
+    letter-spacing: -.5px;
+    font-size: 34px;
+    font-weight: bold;
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: -15px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 5px rgba(68, 68, 68, 0.3);
+    background: linear-gradient(90deg, #444, rgb(94, 0, 14));
+    -webkit-background-clip: text; /* For Safari and older Chrome */
+    background-clip: text; /* Standard */
+    -webkit-text-fill-color: transparent; /* Ensures the text itself is transparent */
+}
+#galleryPhotoContainer {
+	width: 900px;
+    height: auto;
+	overflow: hidden;
+	margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#galleryImage {
+    float: left;
+    width: 800px;
+    height: auto;
+}
+#galleryNavLeftArrow, #galleryNavRightArrow {
+    float: left;
+    width: 50px; 
+    position: relative;
+}
+#galleryNavLeftArrow img, #galleryNavRightArrow img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+#displayCounter {
+    width: 800px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: right;
+    font-size: 20px;
+	font-family: 'Oswald';
+    font-weight: bold;
+	color: #444;
+}
+#galleryPhotoContainerPortrait {
+	width: 633px;
+    height: auto;
+	overflow: hidden;
+	margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#galleryPortraitNavLeftArrow, #galleryPortraitNavRightArrow {
+    float: left;
+    width: 50px; 
+    position: relative;
+}
+#galleryPortraitNavLeftArrow img, #galleryPortraitNavRightArrow img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+#portraitGalleryImage {
+    float: left;
+    width: auto;
+    height: auto;
+}
+#portraitGalleryImage img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+#portraitDisplayCounter {
+    width: 533px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: right;
+    font-size: 20px;
+	font-family: 'Oswald';
+    font-weight: bold;
+	color: #444;
+}
+#galleryPhotoInformation {
+	width: 900px;
+	overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+}
+#galleryPhotoInformation h3 {
+    letter-spacing: -.5px;
+    font-size: 22px;
+    font-weight: bold;
+    font-family: 'Oswald', sans-serif;
+    margin-bottom: -1px;
+    text-shadow: 1px 1px 5px rgba(68, 68, 68, 0.3);
+    background: linear-gradient(90deg, #444, rgb(24, 90, 109));
+    -webkit-background-clip: text; /* For Safari and older Chrome */
+    background-clip: text; /* Standard */
+    -webkit-text-fill-color: transparent; /* Ensures the text itself is transparent */
+}
+#galleryInfoLeftSide {
+	float: left;
+	width: 425px;
+	margin-left: 50px;
+	color: #444;
+	font-size: 13px;
+}
+#galleryInfoRightSide {
+	float: right;
+	width: 300px;
+	margin-right: 50px;
+	color: #444;
+	font-size: 13px;
+}
+#galleryInfoRightSide h4 {
+	letter-spacing: -1px;
+	font-size: 18px;
+	font-weight: bold;
+	font-family: 'Oswald', sans-serif;
+	color: rgb(94,0,14);
+    display: inline;
+}
+.purchaseOptions {
+    display: inline-block;
+}
+.purchaseOptions a {
+    margin-left: 80px;
+    color: #428bca;
+    text-decoration: none;
+    font-size: 22px;
+}
+.addToCartButton {
+    position: relative;
+    display: inline-block;
+    display: block;
+    height: auto;
+    max-width: 70px;
+    padding: 4px;
+    line-height: 1.428571429;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #428bca;
+    border-radius: 4px;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    cursor: Pointer;
+}
+#galleryInfoMap {
+	width: 800px;;
+	margin-left: 50px;
+	margin-right: 50px;
+	padding-top: 120px;
+	height: 250px;
+}
+@media (max-width: 600px) {
+    #galleryNavLinks h1 {
+        font-size: 12px;
+        word-wrap: break-word;
+    }
+    #galleryNavLinks h1 a {
+        display: inline-block; /* Wrap links to the next line if necessary */
+    }
+}
+.selectedDropdowns select {
+    width: 200px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    height: 30px;
+}
+.finish {
+    display: none;
+}   
+.size {
+    display: none;
+}
+  .button {
+    display: none;
+}
+.image_align { /************where*/
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+
