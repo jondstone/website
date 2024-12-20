@@ -1,11 +1,4 @@
 # Shopping Cart and Checkout Example
-
-### Inside this folder contains the working files needed for the shopping cart and checkout feature I built for my website. [www.jondstone.com](https://www.jondstone.com)
-### Each file will contain a comment block in the header detailing how the code works.
-
-
-
-# Shopping Cart and Checkout Example
 This repository contains the code for the "Shopping Cart checkout" portion on my website. The primary goal of this project was to enhance performance, remove unnecessary dependencies, and clean up the codebase for better maintainability and readability.
 
 ### Inside this folder contains the working files needed for the shopping cart and checkout feature I built for my website. [www.jondstone.com](https://www.jondstone.com)
