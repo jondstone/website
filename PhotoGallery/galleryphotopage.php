@@ -61,11 +61,6 @@ if (file_exists('galleryquery.php')) {
 <html lang="en-US">
 <head>
     <link rel="stylesheet" href="photogallery.css" type="text/css" media="all" />
-    <style type="text/css">
-        #galleryNavLeftArrow, #galleryNavRightArrow {
-            height: <?=$height?>px;  
-        }
-    </style>
     <script type="application/ld+json">
         {
         "@context": "https://schema.org",
@@ -116,6 +111,12 @@ if (file_exists('galleryquery.php')) {
             </div>
             <div id="galleryImage">
                 <img src="ghosttrain.jpg" height="533px" width="800px" alt="Ghost Train" />
+                <div id="displayCounter">
+                    <?php 
+                    if (!empty($counter))
+                        echo $counter;
+                    ?>
+                </div>
             </div>
             <div id="galleryNavRightArrow">
                 <?php 
@@ -124,13 +125,7 @@ if (file_exists('galleryquery.php')) {
                 ?>
             </div>
         </div>
-        <div id="displayCounter">
-            <?php 
-            if (!empty($counter))
-                echo $counter;
-            ?>
-        </div>
-		
+        
 		<div id="galleryPhotoInformation">
 			<div id="galleryInfoLeftSide">
 			</div>

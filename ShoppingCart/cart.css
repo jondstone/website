@@ -1,13 +1,17 @@
 #cartContainer {
     width: 100%;
-    margin: auto;
+    margin: 0 auto;
     height: auto;
     padding: 10px;
 }
-/* Left Column (Cart Data)*/
+#cartColumn,
+#paymentColumn{
+    display: inline-block; /* Ensures they appear side by side initially */
+    vertical-align: top; 
+}
+/* Left Column (Cart Data) */
 #cartColumn {
     width: 45%;
-    float: left;
 }
 #cartColumn p.total{
     font-size: 20px;
@@ -38,21 +42,23 @@
 #cartColumn p.discountText{
     font-size: 16px;
     font-weight: normal;
-    padding-left: 225px;
-	display: inline;
+    display: inline;
     color: #444;
-	font-family: 'Oswald', sans-serif;
+    font-family: 'Oswald', sans-serif;
+    float: right;
+    margin: 0;
 }
 #cartColumn p.cartItem{
     font-size: 16px;
 	display: inline;
     color: #444;
 	font-family: 'Oswald', sans-serif;
+    vertical-align: middle;
 }
 /* Right Column (Checkout Form) */
 #paymentColumn {
-    margin-left: 50%;
-    width: 48%;
+    width: 50%;
+    padding-left: 2%;
 } 
 .formInputField:-moz-placeholder{
     color: #999
@@ -65,8 +71,8 @@
 }
 .formInputField{
     display: block;
-    width: 450px;
-    height: 20px;
+    width: 80%;
+    height: 2%;
     padding: 6px 12px;
     font-size: 14px;
     line-height: 1.428571429;
@@ -147,17 +153,20 @@
     border-color: #444;
 }
 /* Error Validation Popup */
-.formValidationModalContent{
-    position: relative;
+.formValidationModalContent {
+    position: absolute; 
+    top: 30%; 
+    left: 50%;
+    transform: translateX(-50%); 
     background-color: #FFF;
     border: 1px solid rgba(0,0,0,0.2);
     border-radius: 6px;
     outline: 0;
-    width: 400px;
+    width: 20%;
     margin: auto;
     -webkit-box-shadow: 0 3px 9px rgba(0,0,0,0.5);
     box-shadow: 0 3px 9px rgba(0,0,0,0.5);
-    background-clip: padding-box
+    background-clip: padding-box;
 }
 .modal{
     position: fixed;
@@ -212,7 +221,7 @@
     border-top: 1px solid #e5e5e5;
     text-align: right;
 }
-.modalCloseButton{
+.modalCloseButton {
     border-radius: 4px;
     font-size: 14px;
     padding: 5px;
@@ -220,19 +229,30 @@
     border-color: #444;
     color: #FFF;
 }
-.modalCloseButton:hover,.modalCloseButton:focus{
+.modalCloseButton:hover,.modalCloseButton:focus {
     background-color: rgb(123,0,18);
     cursor: pointer;
 }
-@media screen and (min-width:768px){
-    .formValidationModalDialog{
-        width: 400px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-    .formValidationModalContent{
+@media (max-width: 768px) {
+    .formValidationModalContent {
+        width: 80%;
         -webkit-box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         box-shadow: 0 5px 15px rgba(0,0,0,0.5)
+    }
+    #cartContainer {
+        width: 95%;
+    }
+    #cartColumn,
+    #paymentColumn {
+        display: block;
+        width: 100%; 
+        padding: 0;
+    }
+    #cartColumn p.cartItem {
+        font-size: 14px;
+    }
+    .form-row {
+        width: 85%;
     }
 }
 /*Stripe Elements CSS*/

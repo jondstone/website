@@ -2,15 +2,12 @@
 <html lang="en-US">
 <head>
 	<title>Jon Stone Photography | Order Confirmation </title>
-	<link rel='stylesheet' href='./../css/cart.css' type='text/css' media='all' />
-    <?php include "./../scripts/header.html" ?>
 </head>
 
 <body>
     <noscript>
         Javascript is currently disabled. This site requires Javascript to be enabled.
     </noscript>
-    <?php include "./../scripts/header.txt" ?>	
 
 	<div id="content">
         <br />
@@ -23,7 +20,6 @@
 	</div>
 
     <div id="footer">
-		<?php include "./../scripts/footer.txt" ?>
 	</div>
 
 </body>

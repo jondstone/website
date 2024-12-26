@@ -40,7 +40,7 @@ function SetGalleryName($gallery, $useDefaultGalleryIfBlank, $currentURL)
         // Current list of Valid Galleries on my site
         $validGalleries = [
             'myfavorites', 'bestsellers', 'atmosphere', 'cityscapes', 'lostplaces', 
-            'nightscapes', 'wildlife', 'desertscapes', 'mountains', 'waterscapes'
+            'nightscapes', 'wildlife', 'desertscapes', 'mountains', 'waterscapes', 'newreleases'
         ];
 
         // Check if gallery is in the list
@@ -175,7 +175,8 @@ function SetGalleryNavDetails($gallery, $useDefaultGalleryIfBlank, $currentURL)
             "wildlife"     => ["name" => "Wildlife",      "url" => "/galleries/wildlife.php"],
             "desertscapes" => ["name" => "Desertscapes",  "url" => "/galleries/desertscapes.php"],
             "mountains"    => ["name" => "Mountains",     "url" => "/galleries/mountains.php"],
-            "waterscapes"  => ["name" => "Waterscapes",   "url" => "/galleries/waterscapes.php"]
+            "waterscapes"  => ["name" => "Waterscapes",   "url" => "/galleries/waterscapes.php"],
+            "newreleases"  => ["name" => "New Releases",   "url" => "/galleries/newreleases.php"]
         ];
 
         // If the gallery is blank, use the fallback gallery name

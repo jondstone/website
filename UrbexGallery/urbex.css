@@ -1,3 +1,189 @@
+#contentUrbex {
+	width: 60%;
+	margin: 0 auto;
+	margin-top: 15px;
+	padding-left: 5px;
+	font-family: 'Oswald';
+	color: #444;
+	font-size: 14px;
+}
+#contentUrbex h1
+{
+	margin-top: -5px;
+}
+#contentUrbex h1 a{
+	letter-spacing: -1px;
+	font-size: 24px;
+	font-weight: bold;
+	font-family: 'Oswald', sans-serif;
+	color: #444;
+    text-shadow: 1px 1px 5px rgba(68, 68, 68, 0.3);
+    background: linear-gradient(90deg, #444, rgb(94, 0, 14));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: underline;
+    text-decoration-color: #444; 
+}
+#contentUrbex p.header{
+	display: inline;
+}
+#contentUrbex p.info{
+	font-size: 14px;
+	display: inline;
+	color: rgb(94,0,14);
+	font-family: 'Oswald', sans-serif;
+}
+#contentUrbex img {
+    width: 100%;
+    height: auto; 
+    margin-top: -20px; 
+    max-width: 100%; 
+}
+#contentUrbex img:hover{
+	opacity: .87;
+}
+#urbexPageContent {
+	width: 60%;
+	color: #444;
+	font-size: 14px;
+	text-align: justify;
+	margin: 0 auto;
+	margin-top: 15px;
+}
+#urbexPageContent h1 {
+	letter-spacing: -1px;
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	font-family: 'Oswald', sans-serif;
+	margin-top: 0px;
+    text-shadow: 1px 1px 5px rgba(68, 68, 68, 0.3);
+}
+#urbexPageContent h2 {
+	color: rgb(94,0,14);
+	letter-spacing: -1px;
+	font-weight: bold;
+	display: inline;
+	font-family: 'Oswald', sans-serif;
+    text-shadow: 1px 1px 5px rgba(68, 68, 68, 0.3);
+}
+#links a{
+	color: rgb(94,0,14);
+	text-decoration: none;
+}
+p.courtesynote{
+	color: rgb(94,0,14);
+	font-size: 14px;
+	text-align: center;
+	font-family: 'Oswald', sans-serif;
+}
+p.note{
+	color: rgb(94,0,14);
+	font-size: 14px;
+	display: inline;
+	font-family: 'Oswald', sans-serif;
+}
+@media (max-width: 1120px) {
+    #contentUrbex,#urbexPageContent {
+		width: 100%;
+	}
+}
+@media (min-width: 1121px) and (max-width: 1600px ) {
+    #contentUrbex,#urbexPageContent {
+		width: 80%;
+	}
+}
+/*---------------------[Responive Images]-------------------*/
+.urbexResponsivePhoto {
+    max-width: 300px;
+}
+.urbexResponsivePanoPhoto {
+    max-width: 700px;
+    margin: 0 auto;
+}
+.urbexResponsivePhoto img {
+    width: 100%; 
+    height: auto; 
+}
+.urbexResponsivePhoto, .urbexResponsivePanoPhoto .caption {
+    margin-top: -5px;
+    font-family: Oswald;
+    text-align: center; 
+}
+#pizitz1{
+    float: left;
+	padding: 10px 5px 5px 0px;
+}
+#pizitz2{
+    float: right;
+	padding: 0px 0px 10px 5px;
+}
+#pizitz3{
+    float: left;
+	padding: 10px 5px 10px 0px;
+}
+#tjfhotel {
+	float: left;
+	padding: 0px 10px 5px 0px;
+}
+#tjfhotel2 {
+	float: right;
+	padding: 0px 0px 0px 10px;
+}
+#tciensley1{
+    float: left;
+	padding: 10px 5px 5px 0px;
+}
+#tciensley2{
+    float: right;
+	padding: 0px 0px 10px 5px;
+}
+#tciensley3{
+	padding: 0px;
+}
+#drish1 {
+    float: left;
+    padding-right: 10px;
+}
+#drish2 {
+	float: right;
+	padding: 0px 0px 0px 10px;
+}
+#drish3 {
+	float: left;
+	padding: 0px 10px 5px 0px;
+}
+@media (max-width: 800px) {
+    .urbexResponsivePhoto {
+        width: 50%; 
+    }
+    .urbexResponsivePanoPhoto img{
+        width: 90%;
+        margin: 0 auto; 
+        display: block;
+    }
+}
+/*---------------------[SFNO]-------------------*/
+.thumbnailPopup{
+    display: flex;
+    flex-direction: column; 
+    text-align: center; 
+    width: 100%;
+}
+.thumbnailPopup img{
+    transition: transform .2s;
+    width: 60%;
+    height: 60%;
+    margin: 0 auto;
+}
+.thumbnailPopup img:hover{
+    transform: scale(1.50);
+}
+.thumbnailPopupCaption {
+    margin-top: 2px; 
+    color: rgb(94,0,14);
+}
 /*--------------------------------------------------
 					GALLERY SECTION
 ---------------------------------------------------*/
@@ -11,46 +197,44 @@
     position: relative;
     background-color: #222;
     border-radius: 10px;
-    padding: 20px;
+    padding: 30px;
     text-align: center;
-    display: flex; /* Use flexbox */
-    align-items: center; /* Center items vertically */
-    justify-content: center; /* Center items horizontally */
-    height: 540px; /* Fixed height for the gallery */
-    overflow: hidden; /* Ensure content doesn't overflow */
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    height: auto; 
+    overflow: hidden; 
 }
 .urbexGallery img {
-    max-height: 100%; /* Ensures the image scales proportionally */
+    max-height: 100%; 
     max-width: 100%; 
-    object-fit: contain; /* Maintain aspect ratio without cropping */
-    border-radius: 10px;
-    max-width: 100%; /* Ensures the image doesn't overflow its container */
+    object-fit: contain; 
 }
 /************** Thumbnail container **************/
 .thumbnail-container {
     position: relative;
     display: flex;
-    justify-content: center; /* Centers the entire thumbnail strip */
+    justify-content: center; 
     align-items: center;
     margin-bottom: 20px;
     user-select: none; /* Prevent text selection */
 }
 .thumbnail-strip {
     display: flex;
-    justify-content: space-between; /* Even space between images */
+    justify-content: space-between; 
     align-items: center;
     padding: 3px;
     background-color: #444;
     border-radius: 10px;
     width: 100%;
-    position: relative; /* Allow positioning of arrows inside */
+    position: relative;
     overflow: hidden;
     padding-left: 15px;
     padding-right: 15px;
     transition: transform 0.5s ease; 
 }
 .thumbnail-strip img {
-    flex-shrink: 0; /* Prevent thumbnails from shrinking */
+    flex-shrink: 0; 
     width: 65px;
     height: 65px;
     margin: 0px;
@@ -93,18 +277,18 @@
 .arrow-container {
     position: absolute;
     top: 0;
-    bottom: 0; /* Stretch to the full height of the container */
+    bottom: 0; 
     width: 40px; 
     background-color: rgba(50, 50, 50, 0.4); 
     transition: background-color 0.3s; 
-    z-index: 10; /* Ensure it's above other elements */
-    cursor: pointer; /* Make the container clickable */
+    z-index: 10; 
+    cursor: pointer; 
     display: flex;
-    justify-content: center; /* Centers the arrows horizontally */
-    align-items: center; /* Centers the arrows vertically */
+    justify-content: center; 
+    align-items: center; 
 }
 .arrow-container:hover {
-    background-color: rgba(50, 50, 50, 0.7); /* Less transparent on hover */
+    background-color: rgba(50, 50, 50, 0.7); 
 }
 .left-arrow-container {
     left: 0;
@@ -136,7 +320,7 @@
     position: absolute; 
     bottom: 5px; 
     left: 50%; 
-    transform: translateX(-50%); /* Center align the text */
+    transform: translateX(-50%); 
     color: #fff;
     user-select: none; 
     font-family: Oswald, sans-serif;
@@ -148,7 +332,7 @@
     bottom: 1px; 
 }
 /************** Mobile and tablet responsiveness **************/
-@media (max-width: 768px) { /* Tablet */
+@media (max-width: 768px) {
     .urbexGallery-container {
         width: 90%;
     }
@@ -159,38 +343,11 @@
         width: 55px;
         height: 55px;
     }
-    .arrow-thumbnail {
-        width: 18px;
-        height: 30px;
-    }
-    .arrow-thumbnail.left {
-        left: 10px;
-    }
-    .arrow-thumbnail.right {
-        right: 10px;
-    }
-    .arrow-container {
-        width: 25px; 
-    }
-    .arrow {
-        width: 22px;  
-        height: 24px; 
-    }
-    .description {
-        font-size: 14px;
-    }
 }
 /* Mobile-only styling */
 @media (max-width: 480px) { 
-    .urbexGallery-container {
-        width: 95%;
-    }
     .urbexGallery img {
-        max-height: 250px; /* Limit image height for mobile */
-    }
-    /* Reduce the maximum width of landscape images by 20% */
-    .urbexGallery img {
-        max-width: 80%; /* 20% smaller for landscape images */
+        max-width: 80%; 
     }
     .thumbnail-strip {
         display: flex;
@@ -204,7 +361,7 @@
         overflow: hidden;
     }
     .thumbnail-strip img {
-        flex-shrink: 0; /* Prevent shrinking */
+        flex-shrink: 0; 
         width: 45px; 
         height: 45px; 
         margin: 0 5px; 
@@ -213,45 +370,22 @@
         object-fit: cover;
         object-position: 0% 0%;
     }
-    .arrow-thumbnail {
-        width: 16px;  
-        height: 25px;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%); 
-        cursor: pointer;
-        z-index: 10;
+    .arrow-container {
+        width: 25px;
     }
-    /* Adjust left arrow to be closer to the left side */
+    .arrow.left {
+        left: 3px;
+    }
+    .arrow.right {
+        right: 3px;
+    }
     .arrow-thumbnail.left {
         left: 5px;
-        background-position: 0 0;
     }
-    /* Adjust right arrow to be closer to the right side */
     .arrow-thumbnail.right {
         right: 5px;
-        background-position: -16px 0;
     }
-    .arrow-thumbnail.disabled {
-        opacity: 0.3;
-        pointer-events: none;
-    }
-    .arrow-thumbnail:hover {
-        opacity: 0.8;
-    }
-}
-/* Landscape orientation fix */
-@media (max-width: 480px) and (orientation: landscape) {
-    .thumbnail-strip {
-        justify-content: flex-start; /* Align thumbnails to the left to avoid overflow */
-        overflow-x: auto; /* Allow horizontal scrolling if needed */
-    }
-    .thumbnail-strip img {
-        width: 40px; 
-        height: 40px; /
-    }
-    .arrow-thumbnail {
-        width: 18px; 
-        height: 28px;
+    .description {
+        font-size: 12px;
     }
 }

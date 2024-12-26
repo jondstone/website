@@ -35,15 +35,13 @@
 <html lang="en-US">
 <head>
 	<title>Jon Stone Photography | Order Confirmation - Error</title>
-	<link rel='stylesheet' href='./../css/cart.css' type='text/css' media='all' />
-    <?php include "./../scripts/header.html" ?>
+	<link rel='stylesheet' href='cart.css' type='text/css' media='all' />
 </head>
 
 <body>
     <noscript>
         Javascript is currently disabled. This site requires Javascript to be enabled.
     </noscript>
-    <?php include "./../scripts/header.txt" ?>	
 
 	<div id="content">
         <br />
@@ -66,7 +64,6 @@
 	</div>
 
     <div id="footer">
-		<?php include "./../scripts/footer.txt" ?>
 	</div>
 
 </body>

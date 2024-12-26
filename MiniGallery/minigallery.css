@@ -30,7 +30,7 @@
 	justify-content: center;
 	align-items: center;
 	z-index: 1000;
-	overflow: hidden; /* Prevent content from overflowing the modal */
+	overflow: hidden; 
 }
 .miniGalleryContainer .modal.active {
 	display: flex;
@@ -38,8 +38,8 @@
 /************** Modal Content **************/
 .miniGalleryContainer .modalContent {
 	position: relative;
-	max-width: 90%; /* Prevents content from getting too wide */
-	max-height: 90%; /* Prevents content from getting too tall */
+	max-width: 90%; 
+	max-height: 90%; 
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -49,9 +49,9 @@
 .miniGalleryContainer .modal img {
 	width: auto;
 	height: auto;
-	max-width: 100%;  /* Ensure image can scale to fit within modal */
-	max-height: 100%; /* Ensure image is contained within modal */
-	object-fit: contain; /* Preserve aspect ratio without stretching */
+	max-width: 100%;  
+	max-height: 100%; 
+	object-fit: contain; 
 }
 /************** Description **************/
 .miniGalleryContainer .description {
@@ -72,7 +72,7 @@
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
-	display: none; /* Initially hidden */
+	display: none; 
 	cursor: pointer;
 	opacity: 0.8;
 	z-index: 1001; /* Ensure the arrows are above other content */
@@ -102,61 +102,73 @@
 	width: auto;
 	height: auto;
 }
-/************** For Tablets (Portrait and Landscape) **************/
-@media (max-width: 768px) {
-	.miniGalleryContainer .miniGallery {
-		grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
-	}
-  
-	.miniGalleryContainer .miniGallery img {
-		height: 120px; /* Adjust image height for smaller screens */
-	}
-}
 /************** For Mobile Devices **************/
 @media (max-width: 480px) {
 	.miniGalleryContainer .miniGallery {
-		grid-template-columns: 1fr; /* Single column for mobile phones */
+		grid-template-columns: repeat(2, 1fr); 
 	}
-	.miniGalleryContainer .miniGallery img {
-		height: 100px; /* Further adjust image height for smaller screens */
-	}
+	.miniGalleryContainer .modalContent .control {
+        position: absolute;
+        top: 50%; 
+        transform: translateY(-50%);
+    }
 	.miniGalleryContainer .description {
-		font-size: 10px; /* Smaller text for mobile devices */
+		font-size: 10px; 
 		padding: 3px;
 	}
-	.miniGalleryContainer .control {
-		top: 40%; /* Adjust position of control buttons on smaller screens */
-	}
+	.miniGalleryContainer .modalContent .control img,
+    .miniGalleryContainer .modalContent .close img {
+        width: 20px;
+        height: 20px;
+    }
+}
+@media (min-width: 801px) and (max-width: 1200px) {
+    .miniGalleryContainer .modalContent img {
+        max-height: 95vh; 
+		max-width: 95vh; 
+		width: auto; 
+		object-fit: contain; 
+    }
+    .miniGalleryContainer .modalContent .control,
+    .miniGalleryContainer .modalContent .close {
+        width: auto;
+        height: auto;
+    }
+    .miniGalleryContainer .modalContent .control img,
+    .miniGalleryContainer .modalContent .close img {
+        width: 20px;
+        height: 20px;
+    }
 }
 /*--------------------------------------------------
-					WEDDING SECTION
+					WEDDING PAGE
 ---------------------------------------------------*/
 #testimonial {
-	width: 960px;
+	width: 100%;
 	overflow: hidden;
 	margin-top: 0px;
 	color: #444;
 	font-size: 13px;
 }
-#t_left {
+#testimonialLeftColumn {
 	float: left;
-	width: 430px;
+	width: 45%;
 	padding-right: 30px;
 	border-right: 1px solid;
 	border-right-color: #444;
 }
-#t_right {
+#testimonialRightColumn {
 	float: right;
-	width: 430px;
+	width: 45%;
 	padding-right: 35px;
 }
-.testimonial_text {
+.testimonialText {
 	margin-top: -100px;
 	padding-left: 120px;
 	font-size: 15px;
 	font-style: italic;
 }
-.testimonial_name {
+.testimonialName {
 	padding-left: 120px;
 	font-family: 'Oswald';
 	font-size: 14px;
@@ -164,10 +176,23 @@
 	color: #444;
 	display: inline;
 }
-.testimonial_location {
+.testimonialLocation {
 	padding-left: 120px;
 	font-family: 'Oswald';
 	font-size: 14px;
 	color: rgb(94,0,14);
 	display: inline;
+}
+@media (max-width: 768px) {
+    #testimonialLeftColumn,
+    #testimonialRightColumn {
+        float: none;
+        width: 100%; 
+        padding-right: 0; 
+        border-right: none; 
+        margin-bottom: 20px; 
+    }
+    #testimonialRightColumn {
+        margin-top: 20px; 
+    }
 }

@@ -70,7 +70,7 @@ In 2024, I focused on modernizing and optimizing my website by refactoring all J
   - Removed unnecessary styles.
   - Renamed fields for better clarity.
   - Added a "modern flair" to previously outdated pages.
-  - Made several pages **mobile-friendly**, improving usability on smaller screens.
+  - All pages are now **mobile-friendly**, improving usability on smaller screens like tablets and cellphones
 
 ### PHP Optimization
 - Cleaned up and refactored all PHP code:
@@ -82,7 +82,6 @@ In 2024, I focused on modernizing and optimizing my website by refactoring all J
 ## TODO
 
 ### Q1 2025
-- Ensure all pages are fully **mobile-friendly** for both tablets and smartphones.
 - Address any remaining issues required for **Google SEO** compliance.
 
 ### Q1–Q2 2025

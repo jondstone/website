@@ -1,6 +1,6 @@
 #individualGalleryPageContent {
-	width: 960px;
-	margin: 5px auto;
+    width: 60%;
+    margin: 0 auto;
 }
 .galleryTableItem {
     margin: 0;           
@@ -39,6 +39,7 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+    width: 95%; 
 }
 .galleryTableItem a img:hover {
     transform: scale(1.05);
@@ -55,18 +56,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    pointer-events: none; /* Ensures the hover effect still works on the image */
+    pointer-events: none; 
 }
 .galleryTableItem:hover .galleryPhotoHoverText {
     visibility: visible; 
 }
 .imageDesc {
-    margin-left: 5px;
-    margin-top: 5px;
+    padding-left: 6px;
 }
 .imagePortraitDesc {
-    margin-left: 85px;
-    margin-top: 10px;
+    padding-left: 5px;
 }
 .imageLocation{
     letter-spacing: -1px;
@@ -86,10 +85,6 @@
     padding-left: 2px;
 }
 /******* Individual Gallery Pages *******/
-#individualGalleryPageContent {
-	width: 960px;
-	margin: 5px auto;
-}
 #galleryNavLinks {
     overflow: visible;
 }
@@ -124,99 +119,71 @@
     font-weight: bold;
     font-family: 'Oswald', sans-serif;
     text-align: center;
-    margin-top: 20px;
-    margin-bottom: -15px;
+    margin-bottom: 0px;
     text-transform: uppercase;
     text-shadow: 1px 1px 5px rgba(68, 68, 68, 0.3);
     background: linear-gradient(90deg, #444, rgb(94, 0, 14));
     -webkit-background-clip: text; /* For Safari and older Chrome */
-    background-clip: text; /* Standard */
-    -webkit-text-fill-color: transparent; /* Ensures the text itself is transparent */
+    background-clip: text;
+    -webkit-text-fill-color: transparent; 
 }
 #galleryPhotoContainer {
-	width: 900px;
-    height: auto;
-	overflow: hidden;
-	margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+}
+#galleryNavLeftArrow,
+#galleryNavRightArrow {
+    width: 10%; 
+    padding: 5px;
+    margin-top: -2%;
+}
+/* RightArrow is automatically aligned correctly (left) */
+#galleryNavLeftArrow,
+#galleryNavPortraitLeftArrow { 
+    text-align: right; 
+}
+#galleryNavPortraitLeftArrow,
+#galleryNavPortraitRightArrow {
+    width: 25%; 
+    padding: 5px;
+    margin-top: -2%;
 }
 #galleryImage {
-    float: left;
-    width: 800px;
-    height: auto;
-}
-#galleryNavLeftArrow, #galleryNavRightArrow {
-    float: left;
-    width: 50px; 
+    text-align: center;
     position: relative;
+    width: 80%;
 }
-#galleryNavLeftArrow img, #galleryNavRightArrow img {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
+#galleryPortraitImage {
+    text-align: center;
+    position: relative; 
+    width: 50%;
+}
+#galleryImage img,
+#galleryPortraitImage img {
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
+    object-fit: contain; 
+    display: block;
+    margin: 0 auto;
 }
 #displayCounter {
-    width: 800px;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
     text-align: right;
     font-size: 20px;
-	font-family: 'Oswald';
+    font-family: 'Oswald';
     font-weight: bold;
-	color: #444;
-}
-#galleryPhotoContainerPortrait {
-	width: 633px;
-    height: auto;
-	overflow: hidden;
-	margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
-}
-#galleryPortraitNavLeftArrow, #galleryPortraitNavRightArrow {
-    float: left;
-    width: 50px; 
-    position: relative;
-}
-#galleryPortraitNavLeftArrow img, #galleryPortraitNavRightArrow img {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-}
-#portraitGalleryImage {
-    float: left;
-    width: auto;
-    height: auto;
-}
-#portraitGalleryImage img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-#portraitDisplayCounter {
-    width: 533px;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: right;
-    font-size: 20px;
-	font-family: 'Oswald';
-    font-weight: bold;
-	color: #444;
+    color: #444;
 }
 #galleryPhotoInformation {
-	width: 900px;
+	width: 100%;
 	overflow: hidden;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap; /* Enables wrapping if necessary */
+    justify-content: space-between;
 }
 #galleryPhotoInformation h3 {
     letter-spacing: -.5px;
@@ -230,19 +197,20 @@
     background-clip: text; /* Standard */
     -webkit-text-fill-color: transparent; /* Ensures the text itself is transparent */
 }
-#galleryInfoLeftSide {
-	float: left;
-	width: 425px;
-	margin-left: 50px;
-	color: #444;
+#galleryInfoLeftSide,
+#galleryInfoRightSide {
+    display: inline-block; /* Ensures they appear side by side initially */
+    vertical-align: top; 
+    color: #444;
 	font-size: 13px;
 }
+#galleryInfoLeftSide {
+    width: 50%;
+    padding-left: 5%;
+}
 #galleryInfoRightSide {
-	float: right;
-	width: 300px;
-	margin-right: 50px;
-	color: #444;
-	font-size: 13px;
+    width: 35%; 
+    padding-right: 5%;
 }
 #galleryInfoRightSide h4 {
 	letter-spacing: -1px;
@@ -270,7 +238,7 @@
     padding: 4px;
     line-height: 1.428571429;
     background-color: #fff;
-    border: 1px solid #ddd;
+    border: 1px solid #428bca;
     color: #428bca;
     border-radius: 4px;
     -webkit-transition: all .2s ease-in-out;
@@ -278,20 +246,10 @@
     cursor: Pointer;
 }
 #galleryInfoMap {
-	width: 800px;;
-	margin-left: 50px;
-	margin-right: 50px;
-	padding-top: 120px;
-	height: 250px;
-}
-@media (max-width: 600px) {
-    #galleryNavLinks h1 {
-        font-size: 12px;
-        word-wrap: break-word;
-    }
-    #galleryNavLinks h1 a {
-        display: inline-block; /* Wrap links to the next line if necessary */
-    }
+	width: 90%;
+	margin: 0 auto;
+    height: 50vh; 
+    max-height: 400px; 
 }
 .selectedDropdowns select {
     width: 200px;
@@ -308,12 +266,68 @@
   .button {
     display: none;
 }
-.image_align { /************where*/
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+@media (max-width: 768px) {
+    .imageLocation{
+        font-size: 14px;
+    }
+    .imageDesc {
+        height: 45px;
+        padding: 0px;
+    }
+    .imagePortraitDesc {
+        height: 45px;
+        padding: 0px;
+    }
+    .galleryTableItem h5 {
+        font-size: 14px;
+    }
+    .galleryPhotoHoverText {
+        font-size: 18px;
+        left: 50%;
+        transform: translateX(-50%); 
+        text-align: center; 
+    }
+    /* Individual Gallery Pages */
+    #galleryNavLinks h1 {
+        font-size: 12px;
+    }
+    #individualGalleryPageContent h2 {
+        font-size: 28px;
+    }
+    #galleryImage {
+        width: 90%;
+    }
+    #galleryImage img {
+        width: 100%;
+    }
+    #galleryPortraitImage{
+        width: 50%;
+    }
+    #galleryNavLeftArrow img,
+    #galleryNavRightArrow img {
+        width: 50%;
+    }
+    #galleryNavPortraitLeftArrow img,
+    #galleryNavPortraitRightArrow img {
+        width: 20%;
+    }
+    #galleryInfoLeftSide,
+    #galleryInfoRightSide {
+        display: block;
+        width: 100%; 
+        padding: 0;
+    }
+    .addToCartButton {
+        max-width: 80px;
+    }
 }
-
-
-
-
+@media (max-width: 1120px) {
+    #individualGalleryPageContent {
+		width: 100%;
+	}
+}
+@media (min-width: 1121px) and (max-width: 1600px ) {
+    #individualGalleryPageContent {
+		width: 60%;
+	}
+}
