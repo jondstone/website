@@ -5,9 +5,9 @@
 * MiniGallery (Folder contains PHP and JS code for MiniGallery used on the Real Estate and Weddings pages)
 * Misc (Folder contains Misc. PHP and JS code used throughout my website)
 * PhotoGallery (contains PHP, JS and CSS code for the Photo Gallery portion of my website)
+* Search (contains PHP, JS, and CSS code for my website's sesrch engine)
 * ShoppingCart (This folder contains code I've written for a custom built shopping cart and checkout feature.)
 * UrbexGallery (Folder contains PHP and JS code for the Gallery used throughout the Urban Exploration pages)
-
 ---------------------------------------
 
 # 2019 Design:
@@ -79,16 +79,16 @@ In 2024, I focused on modernizing and optimizing my website by refactoring all J
 
 ---------------------------------------
 
+# 2025 Update:
+In 2025, I finished developing my own search engine algorithm; completing multiple cycles of iteration and testing to finalize the crawler, sorting, and ranking systems, as well as the front-end page design.
+
+Additionally, I designed and implemented a new menu and footer, along with various small visual updates to refresh the look and feel of the site.
+
+---------------------------------------
+
 ## TODO
 
-### Q1 2025
-- Address any remaining issues required for **Google SEO** compliance.
-
-### Q1–Q2 2025
-- Develop a custom **search engine** for the website.
+### 2026
 - Update checkout pages:
-  - Ensure the shopping cart clears items after successful checkout and payment.
-- Add support for **international addresses** and **credit cards**.
-
-### 2025 or Later
+  - Resolve issue where the shopping cart fails to clear items after a successful checkout and payment.
 - Replace **Disqus** with a custom-built **commenting system** for the urban exploration pages.
