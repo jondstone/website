@@ -1,169 +1,213 @@
-// Create a Stripe client.
-var stripe = Stripe('pk_live_livekey');
+var stripe = Stripe('pk_live_key');
+var elements;
+var paymentElement;
+var currentPaymentIntentId = null;
 
-// Create an instance of Elements.
-var elements = stripe.elements();
+// Sets the text content of the pay button
+function setPayButton(text) {
+  const el = document.getElementById('payButtonText');
+  if (el) el.textContent = text;
+}
 
-// Custom styling can be passed to options when creating an Element.
-// (Note that this demo uses a wider set of styles than the guide below.)
-var style = {
-  base: {
-    color: '#32325d',
-    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-    fontSmoothing: 'antialiased',
-    fontSize: '16px',
-    '::placeholder': {
-      color: '#aab7c4'
-    }
-  },
-  invalid: {
-    color: '#fa755a',
-    iconColor: '#fa755a'
+// Initializes the Stripe payment element with a new PaymentIntent
+async function initializePaymentElement() {
+  const totalAmount = document.getElementById('totalAmount').value;
+  if (!totalAmount || totalAmount === '0') return;
+
+  const discountCodeEl = document.getElementById('discountCode');
+  const discountCode = discountCodeEl ? discountCodeEl.value : '';
+
+  const formData = new FormData();
+  formData.append('action', 'create_payment_intent');
+  formData.append('amount', totalAmount + '00');
+  formData.append('discountCode', discountCode);
+
+  const response = await fetch('charge.php', { method: 'POST', body: formData });
+  const data = await response.json();
+
+  if (data.error) {
+    elements = null;
+    paymentElement = null;
+    return;
   }
-};
 
-// Create an instance of the card Element.
-var card = elements.create('card', {style: style});
+  currentPaymentIntentId = data.paymentIntentId;
 
-// Add an instance of the card element
-card.mount('#cardElement');
+  elements = stripe.elements({
+    clientSecret: data.clientSecret,
+    appearance: { theme: 'stripe' }
+  });
 
-// Handle real-time validation errors from the card Element.
-card.addEventListener('change', function(event) {
-  var displayError = document.getElementById('cardErrors');
-  if (event.error) {
-    displayError.textContent = event.error.message;
-  } else {
-    displayError.textContent = '';
-  }
-});
+  paymentElement = elements.create('payment', { layout: 'accordion' });
+  paymentElement.mount('#payment-element');
+}
 
-// Handle form submission.
+// Handles form submission and payment confirmation
 var form = document.getElementById('checkout');
-form.addEventListener('submit', function(event) {
+form.addEventListener('submit', async function (event) {
   event.preventDefault();
 
-  stripe.createToken(card).then(function(result) {
-    if (result.error) {
-      // Inform the user if there was an error.
-      var errorElement = document.getElementById('cardErrors');
-      errorElement.textContent = result.error.message;
-    } else {
-      // Send the token to your server.
-      stripeTokenHandler(result.token);
+  if (!payButtonClicked()) return;
+
+  if (!elements) {
+    await initializePaymentElement();
+    if (!elements) return;
+    setPayButton('Submit Payment');
+    return;
+  }
+
+  const submitButton = document.getElementById('payButton');
+  submitButton.disabled = true;
+  setPayButton('Processing...');
+
+  try {
+    const { error, paymentIntent } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url:
+          window.location.origin +
+          window.location.pathname.replace('index.php', 'orderconfirmation.php'),
+        receipt_email: document.getElementById('email').value
+      },
+      redirect: 'if_required'
+    });
+
+    if (error) {
+      showModal('Payment Failed', error.message);
+      submitButton.disabled = false;
+      setPayButton('Submit Payment');
+      return;
     }
-  });
+
+    if (paymentIntent && paymentIntent.status === 'succeeded') {
+      var hiddenInput = document.createElement('input');
+      hiddenInput.type = 'hidden';
+      hiddenInput.name = 'paymentIntentId';
+      hiddenInput.value = paymentIntent.id;
+      form.appendChild(hiddenInput);
+      form.submit();
+    }
+  } catch (err) {
+    showModal('Error', 'An unexpected error occurred.');
+    submitButton.disabled = false;
+    setPayButton('Submit Payment');
+  }
 });
 
-// Submit the form with the token ID.
-function stripeTokenHandler(token) {
-  // Insert the token ID into the form so it gets submitted to the server
-  var form = document.getElementById('checkout');
-  var hiddenInput = document.createElement('input');
-  hiddenInput.setAttribute('type', 'hidden');
-  hiddenInput.setAttribute('name', 'stripeToken');
-  hiddenInput.setAttribute('value', token.id);
-  form.appendChild(hiddenInput);
-
-  // Submit the form
-  form.submit();
-}
-/* ---------------------------------------- */
-// Update the cart as soon as the page loads
-// This ensures the cart data is consistent with local storage
+// Initializes the cart on page load
 document.addEventListener('DOMContentLoaded', function () {
   updateCart();
 });
 
-// Update cart items and calculate total
-function updateCart() {
+// Updates cart display, validates discount code, and calculates totals
+async function updateCart() {
   "use strict";
-  var cartData = ""; 
+  var cartData = "";
   var cartItems = '';
   var counter = 0;
   var total = 0.0;
   var discountTotal = 0.0;
   var discountText = '';
   var doesDiscountExist = false;
-  cartData += "";
 
-  document.addEventListener('DOMContentLoaded', function () {
-      var cartIconText = document.getElementById('cartIconText');
-
-      if (cartIconText) {
-          if (localStorage.length > 0) {
-              cartIconText.textContent = localStorage.length;
-          } else {
-              cartIconText.textContent = '';
-          }
-      } 
-  });
-
-  // Iterate through items in local storage
-  for (var i = 0, len = localStorage.length; i < len; i++) {
-      var key = localStorage.key(i);
-      var value = localStorage.getItem(key);
-
-      var delimited = value.split("_");
-      var name = delimited[0];
-      var productGroup = delimited[1];
-      var finish = delimited[2];
-      var size = delimited[3];
-      var priceInfo = delimited[4];
-
-      total += parseInt(priceInfo);
-      
-      var removeButton = "<button type=\"button\" class='btn btnRemoveItem' style='margin:10px;' onclick='removeFromCart(\"" + key + "\")' />x</button>";
-      cartData += removeButton + "<p class=\"cartItem\">" + name + " (" + productGroup + " " + size + ")(" + finish + ") $" + priceInfo + "</p><br/>";
-      cartItems += name + " (" + productGroup + " " + size + ")(" + finish + ") $" + priceInfo;
-      counter++;
+  var cartIconText = document.getElementById('cartIconText');
+  if (cartIconText) {
+    cartIconText.textContent = localStorage.length > 0 ? localStorage.length : '';
   }
 
-  //  Update the hidden input field with cart items
-  document.getElementById('cartItems').value = cartItems;
+  for (var i = 0, len = localStorage.length; i < len; i++) {
+    var key = localStorage.key(i);
+    var value = localStorage.getItem(key);
 
-  // Insert horz line between cart items and Total Price
+    var delimited = value.split("_");
+    var name = delimited[0];
+    var productGroup = delimited[1];
+    var finish = delimited[2];
+    var size = delimited[3];
+    var priceInfo = delimited[4];
+
+    total += parseInt(priceInfo);
+
+    var removeButton = "<button type=\"button\" class='btn btnRemoveItem' style='margin:10px;' onclick='removeFromCart(\"" + key + "\")' />x</button>";
+    cartData += removeButton + "<p class=\"cartItem\">" + name + " (" + productGroup + " " + size + ")(" + finish + ") $" + priceInfo + "</p><br/>";
+    cartItems += name + "|" + productGroup + "|" + size + "|" + finish + "||";
+    counter++;
+  }
+
+  document.getElementById('cartItems').value = cartItems;
   cartData += '<hr>';
 
-  // Check for valid discount code
-  var previousTotal;
-  var discountCode = document.getElementById('discountCode').value;
-  var hashedCode = SHA1(discountCode); 
+  var discountCodeEl = document.getElementById('discountCode');
+  var discountCode = discountCodeEl ? discountCodeEl.value : '';
+  
+  if (discountCode.trim() !== '') {
+    const formData = new FormData();
+    formData.append('action', 'validate_discount');
+    formData.append('discountCode', discountCode);
 
-  if (hashedCode === 'SHA1HASHCODE') {
-      previousTotal = total;
-      total = Math.floor(total * 0.85); 
-      discountTotal = previousTotal - total;
-      discountText = "15% Discount";
-      doesDiscountExist = true;
+    try {
+      const response = await fetch('charge.php', { method: 'POST', body: formData });
+      const data = await response.json();
+
+      if (data.valid && data.discountPercent > 0) {
+        var previousTotal = total;
+        total = Math.floor(total * (1 - data.discountPercent));
+        discountTotal = previousTotal - total;
+        discountText = (data.discountPercent * 100) + "% Discount";
+        doesDiscountExist = true;
+        setBorderColor(document.getElementById('discountCode'), true);
+        
+        // Update existing PaymentIntent with new discounted amount
+        if (currentPaymentIntentId) {
+          const updateFormData = new FormData();
+          updateFormData.append('action', 'update_payment_intent');
+          updateFormData.append('paymentIntentId', currentPaymentIntentId);
+          updateFormData.append('amount', total + '00');
+          updateFormData.append('discountCode', discountCode);
+          
+          await fetch('charge.php', { method: 'POST', body: updateFormData });
+        }
+      } else if (data.valid && data.discountPercent === 0) {
+        // Empty discount code - reset border to default
+        setBorderColor(document.getElementById('discountCode'), null);
+      } else {
+        // Invalid discount code - show red border
+        setBorderColor(document.getElementById('discountCode'), false);
+      }
+    } catch (error) {}
+  } else {
+    // No discount code entered - reset border to default
+    if (discountCodeEl) {
+      discountCodeEl.style.borderColor = '';
+    }
   }
 
-  // Update discount existence input for server-side validation
-  document.getElementById('discountExist').value = doesDiscountExist; 
   if (doesDiscountExist) {
-      cartData += "<strong><p class=\"discountHeader\">Discount:</p>" + 
-                  "<p class=\"discountAmount\"> -$" + discountTotal + " </p>" + 
-                  "<p class=\"discountText\">(" + discountText + ")</p><hr>\n";
+    cartData += "<strong><p class=\"discountHeader\">Discount:</p>" +
+      "<p class=\"discountAmount\"> -$" + discountTotal + " </p>" +
+      "<p class=\"discountText\">(" + discountText + ")</p><hr>\n";
   }
 
-  // Display Total Price
   cartData += "<strong><p class=\"total\">Total:</p> " + "<p class=\"amount\">$" + total + "</p></strong>";
 
-  // Update the cart display or show empty cart message
   if (counter > 0) {
-      document.getElementById('cartData').innerHTML = cartData;
-      document.getElementById('paymentColumn').style.visibility = 'visible';
+    document.getElementById('cartData').innerHTML = cartData;
+    document.getElementById('paymentColumn').style.visibility = 'visible';
   } else {
-      document.getElementById('cartData').innerHTML = "<h1 align=\"center\"><br/>The cart is empty!<br/><br/></h1>";
-      document.getElementById('paymentColumn').style.visibility = 'visible';
+    document.getElementById('cartData').innerHTML = "<h1 align=\"center\"><br/>The cart is empty!<br/><br/></h1>";
+    document.getElementById('paymentColumn').style.visibility = 'visible';
   }
 
-  // Update payment button and total amount
-  document.getElementById('payButton').value = "Pay $" + total.toString();
+  if (elements) {
+    setPayButton("Submit Payment");
+  } else {
+    setPayButton("Pay $" + total.toString());
+  }
+
   document.getElementById('totalAmount').value = total;
 }
 
-// Array of field elements and their corresponding validation functions
+// Array of form fields with their validation functions
 const fields = [
   { id: 'email', validate: checkEmail },
   { id: 'firstName', validate: checkFirstName },
@@ -171,164 +215,170 @@ const fields = [
   { id: 'address', validate: checkAddress },
   { id: 'city', validate: checkCity },
   { id: 'state', validate: checkState },
-  { id: 'zip', validate: checkZip },
-  { id: 'discountCode', validate: checkDiscountCode }
+  { id: 'zip', validate: checkZip }
 ];
 
-// Attach input event listeners to each field, and validate on realtime
+// Attaches input event listeners to form fields for real-time validation
 fields.forEach(field => {
   const element = document.getElementById(field.id);
   if (element) {
-      element.addEventListener('input', () => {
-          field.validate();
-          if (field.id === 'discountCode') {
-              updateCart();  // Update cart when discount code is validated
-          }
-      });
+    element.addEventListener('input', () => {
+      field.validate();
+    });
   }
 });
 
-// Remove an item from the cart and update
+// Attaches input event listener to discount code field
+const discountInput = document.getElementById('discountCode');
+if (discountInput) {
+  discountInput.addEventListener('input', () => {
+    updateCart();
+  });
+}
+
+// Removes an item from the cart and updates the display
 function removeFromCart(keyToRemove) {
   localStorage.removeItem(keyToRemove);
   updateCart();
 }
 
-// Utility function for setting field border color based on validity
+// Sets the border color of an element based on validation state
 function setBorderColor(element, isValid) {
-  element.style.borderColor = isValid ? '#0F0' : '#F00';
+  if (!element) return;
+  
+  if (isValid === null) {
+    // Reset to default
+    element.style.borderColor = '';
+  } else {
+    element.style.borderColor = isValid ? '#0F0' : '#F00';
+  }
 }
 
-// Field-specific validation functions
-function checkDiscountCode() {
-  const discountCode = document.getElementById('discountCode').value;
-  const isValid = SHA1(discountCode) === 'SHA1HASHCODE';
-  setBorderColor(document.getElementById('discountCode'), isValid);
-  return isValid;
+// Checks if the cart contains any items
+function checkCartItems() {
+  return localStorage.length > 0;
 }
 
-function checkCartItems(){
-  const cartItems = document.getElementById('cartItems').value;
-  const isValid = cartItems.length > 0;
-  return isValid;
-}
-
+// Validates the first name field
 function checkFirstName() {
-  const firstName = document.getElementById('firstName').value;
-  const isValid = checkAlphaOnly(firstName);
-  setBorderColor(document.getElementById('firstName'), isValid);
-  return isValid;
+  var firstNameInput = document.getElementById('firstName');
+  var firstName = firstNameInput.value.trim();
+  var result = firstName.length > 0 && checkAlphaOnly(firstName);
+  setBorderColor(firstNameInput, result);
+  return result;
 }
 
+// Validates the last name field
 function checkLastName() {
-  const lastName = document.getElementById('lastName').value;
-  const isValid = checkAlphaOnly(lastName);
-  setBorderColor(document.getElementById('lastName'), isValid);
-  return isValid;
+  var lastNameInput = document.getElementById('lastName');
+  var lastName = lastNameInput.value.trim();
+  var result = lastName.length > 0 && checkAlphaOnly(lastName);
+  setBorderColor(lastNameInput, result);
+  return result;
 }
 
+// Validates the address field
 function checkAddress() {
-  const address = document.getElementById('address').value;
-  const isValid = address.length > 4;
-  setBorderColor(document.getElementById('address'), isValid);
-  return isValid;
+  var addressInput = document.getElementById('address');
+  var address = addressInput.value.trim();
+  var result = address.length > 0;
+  setBorderColor(addressInput, result);
+  return result;
 }
 
+// Validates the city field
 function checkCity() {
-  const city = document.getElementById('city').value;
-  const isValid = checkAlphaOnly(city);
-  setBorderColor(document.getElementById('city'), isValid);
-  return isValid;
+  var cityInput = document.getElementById('city');
+  var city = cityInput.value.trim();
+  var result = city.length > 0 && checkAlphaOnly(city);
+  setBorderColor(cityInput, result);
+  return result;
 }
 
+// Validates the state field
 function checkState() {
-  const state = document.getElementById('state').value;
-  const isValid = checkAlphaOnly(state) && state.length > 1;
-  setBorderColor(document.getElementById('state'), isValid);
-  return isValid;
+  var stateInput = document.getElementById('state');
+  var state = stateInput.value.trim();
+  var result = state.length > 0 && checkAlphaOnly(state);
+  setBorderColor(stateInput, result);
+  return result;
 }
 
+// Validates the zip code field
 function checkZip() {
-  const zip = document.getElementById('zip').value;
-  const isValid = checkNumberOnly(zip) && zip.length > 4;
-  setBorderColor(document.getElementById('zip'), isValid);
-  return isValid;
+  var zipInput = document.getElementById('zip');
+  var zip = zipInput.value.trim();
+  var result = zip.length === 5 && checkNumberOnly(zip);
+  setBorderColor(zipInput, result);
+  return result;
 }
 
+// Displays a modal dialog with a title and message
 function showModal(title, body) {
-  // Get modal elements
   const modal = document.getElementById('formValidationModal');
-  const modalHeader = document.getElementById('modalHeader');
-  const modalBody = document.getElementById('modalBody');
+  if (!modal) return;
 
-  // Set title and body content
-  modalHeader.textContent = title;
-  modalBody.textContent = body;
+  const header = document.getElementById('modalHeader');
+  const content = document.getElementById('modalBody');
 
-  // Show the modal
+  if (header) header.textContent = title;
+  if (content) content.textContent = body;
+
   modal.style.display = 'block';
   modal.classList.add('show');
 
-  // Add event listener to close modal when clicking the close button or outside the modal
   const closeButtons = modal.querySelectorAll('.modalCloseButton, .modalXClose');
-  closeButtons.forEach(button => {
-      button.addEventListener('click', hideModal);
-  });
+  closeButtons.forEach(button => button.addEventListener('click', hideModal));
 
   window.addEventListener('click', (event) => {
-      if (event.target === modal) {
-          hideModal();
-      }
+    if (event.target === modal) hideModal();
   });
 }
 
+// Hides the modal dialog
 function hideModal() {
   const modal = document.getElementById('formValidationModal');
+  if (!modal) return;
   modal.style.display = 'none';
   modal.classList.remove('show');
 }
 
-// Validate Fields when "Pay" button is clicked
+// Validates all required fields when the pay button is clicked
 function payButtonClicked() {
   var title = 'Error';
 
-  // Validation functions and corresponding error messages
   var checks = [
-      { check: checkCartItems, message: "You have no items in your cart!" },
-      { check: checkFirstName, message: "Please enter a valid first name" },
-      { check: checkLastName, message: "Please enter a valid last name" },
-      { check: checkEmail, message: "Please enter a valid email address" },
-      { check: checkAddress, message: "Please enter a valid address" },
-      { check: checkCity, message: "Please enter a valid city" },
-      { check: checkState, message: "Please enter a valid state" },
-      { check: checkZip, message: "Please enter a valid zip" }
+    { check: checkCartItems, message: "You have no items in your cart!" },
+    { check: checkFirstName, message: "Please enter a valid first name" },
+    { check: checkLastName, message: "Please enter a valid last name" },
+    { check: checkEmail, message: "Please enter a valid email address" },
+    { check: checkAddress, message: "Please enter a valid address" },
+    { check: checkCity, message: "Please enter a valid city" },
+    { check: checkState, message: "Please enter a valid state" },
+    { check: checkZip, message: "Please enter a valid zip" }
   ];
 
-  // Loop through validations
   for (var i = 0; i < checks.length; i++) {
-      if (!checks[i].check()) {
-          showModal(title, checks[i].message); // Show modal with error message
-          updateCart(); // Update the cart
-          return false; // Stop further processing
-      }
+    if (!checks[i].check()) {
+      showModal(title, checks[i].message);
+      updateCart();
+      return false;
+    }
   }
-
-  // If checks pass, update the pay button value
-  document.getElementById('payButton').value = 'Processing...';
 
   return true;
 }
 
-// Ensure First and Last Name, City, and State contain letters only
-function checkAlphaOnly(name) { 
+// Validates that a string contains only alphabetic characters and spaces
+function checkAlphaOnly(name) {
   var alphaCheck = /^[a-zA-Z\s]+$/;
   return alphaCheck.test(name);
 }
 
-// Validate Email Field
+// Validates the email address field using RFC 822 specification
 function checkEmail() {
-  var emailInput = document.getElementById('email'); // Get email input element
-  var emailAddress = emailInput.value; // Get the value of the input
+  var emailInput = document.getElementById('email');
+  var emailAddress = emailInput.value;
 
   var sQtext = '[^\\x0d\\x22\\x5c\\x80-\\xff]';
   var sDtext = '[^\\x0d\\x5b-\\x5d\\x80-\\xff]';
@@ -340,162 +390,19 @@ function checkEmail() {
   var sSubDomain = '(' + sDomain_ref + '|' + sDomainLiteral + ')';
   var sWord = '(' + sAtom + '|' + sQuotedString + ')';
   var sDomain = sSubDomain + '(\\x2e' + sSubDomain + ')*';
-  var sLocalPart = sWord + '(\\x2e' + sWord + ')*';
+  var sLocalPart = sWord + '(\\x2e' + sWord + ')*'; 
   var sAddrSpec = sLocalPart + '\\x40' + sDomain; // Full RFC 822 email address spec
-  var sValidEmail = '^' + sAddrSpec + '$';
+  var sValidEmail = '^' + sAddrSpec + '$'; 
 
   var reValidEmail = new RegExp(sValidEmail);
-
-  // Validate email address
   var result = reValidEmail.test(emailAddress);
 
-  // Provide visual feedback
   emailInput.style.borderColor = result ? '#0F0' : '#F00';
-
-  return result; 
+  return result;
 }
 
-// Verify ZipCode field is numbers only
+// Validates that a string contains only numeric characters
 function checkNumberOnly(zip) {
   var numberCheck = new RegExp("^[0-9]+$");
   return numberCheck.test(zip);
-}
-
-/**
- * Computes the SHA-1 hash of a string.
- * Converts input to UTF-8 and processes it per SHA-1 specifications.
- * Returns a 40-character hexadecimal hash.
- */
-function SHA1(msg) {
-  function rotate_left(n,s) {
-      var t4 = (n<<s) | (n>>>(32-s));
-      return t4;
-  }
-  function lsb_hex(val) {
-      var str="";
-      var i;
-      var vh;
-      var vl;
-      for( i=0; i<=6; i+=2 ) {
-          vh = (val>>>(i*4+4))&0x0f;
-          vl = (val>>>(i*4))&0x0f;
-          str += vh.toString(16) + vl.toString(16);
-      }
-      return str;
-  }
-  function cvt_hex(val) {
-      var str="";
-      var i;
-      var v;
-      for( i=7; i>=0; i-- ) {
-          v = (val>>>(i*4))&0x0f;
-          str += v.toString(16);
-      }
-      return str;
-  }
-  function Utf8Encode(string) {
-      string = string.replace(/\r\n/g,"\n");
-      var utftext = "";
-      for (var n = 0; n < string.length; n++) {
-          var c = string.charCodeAt(n);
-          if (c < 128) {
-              utftext += String.fromCharCode(c);
-          }
-          else if((c > 127) && (c < 2048)) {
-              utftext += String.fromCharCode((c >> 6) | 192);
-              utftext += String.fromCharCode((c & 63) | 128);
-          }
-          else {
-              utftext += String.fromCharCode((c >> 12) | 224);
-              utftext += String.fromCharCode(((c >> 6) & 63) | 128);
-              utftext += String.fromCharCode((c & 63) | 128);
-          }
-      }
-      return utftext;
-  }
-  var blockstart;
-  var i, j;
-  var W = new Array(80);
-  var H0 = 0x67452301;
-  var H1 = 0xEFCDAB89;
-  var H2 = 0x98BADCFE;
-  var H3 = 0x10325476;
-  var H4 = 0xC3D2E1F0;
-  var A, B, C, D, E;
-  var temp;
-  msg = Utf8Encode(msg);
-  var msg_len = msg.length;
-  var word_array = new Array();
-  for( i=0; i<msg_len-3; i+=4 ) {
-      j = msg.charCodeAt(i)<<24 | msg.charCodeAt(i+1)<<16 |
-      msg.charCodeAt(i+2)<<8 | msg.charCodeAt(i+3);
-      word_array.push( j );
-  }
-  switch( msg_len % 4 ) {
-      case 0:
-          i = 0x080000000;
-          break;
-      case 1:
-          i = msg.charCodeAt(msg_len-1)<<24 | 0x0800000;
-          break;
-      case 2:
-          i = msg.charCodeAt(msg_len-2)<<24 | msg.charCodeAt(msg_len-1)<<16 | 0x08000;
-          break;
-      case 3:
-          i = msg.charCodeAt(msg_len-3)<<24 | msg.charCodeAt(msg_len-2)<<16 | msg.charCodeAt(msg_len-1)<<8  | 0x80;
-          break;
-  }
-  word_array.push( i );
-  while( (word_array.length % 16) != 14 ) word_array.push( 0 );
-  word_array.push( msg_len>>>29 );
-  word_array.push( (msg_len<<3)&0x0ffffffff );
-  for ( blockstart=0; blockstart<word_array.length; blockstart+=16 ) {
-      for( i=0; i<16; i++ ) W[i] = word_array[blockstart+i];
-      for( i=16; i<=79; i++ ) W[i] = rotate_left(W[i-3] ^ W[i-8] ^ W[i-14] ^ W[i-16], 1);
-      A = H0;
-      B = H1;
-      C = H2;
-      D = H3;
-      E = H4;
-      for( i= 0; i<=19; i++ ) {
-          temp = (rotate_left(A,5) + ((B&C) | (~B&D)) + E + W[i] + 0x5A827999) & 0x0ffffffff;
-          E = D;
-          D = C;
-          C = rotate_left(B,30);
-          B = A;
-          A = temp;
-      }
-      for( i=20; i<=39; i++ ) {
-          temp = (rotate_left(A,5) + (B ^ C ^ D) + E + W[i] + 0x6ED9EBA1) & 0x0ffffffff;
-          E = D;
-          D = C;
-          C = rotate_left(B,30);
-          B = A;
-          A = temp;
-      }
-      for( i=40; i<=59; i++ ) {
-          temp = (rotate_left(A,5) + ((B&C) | (B&D) | (C&D)) + E + W[i] + 0x8F1BBCDC) & 0x0ffffffff;
-          E = D;
-          D = C;
-          C = rotate_left(B,30);
-          B = A;
-          A = temp;
-      }
-      for( i=60; i<=79; i++ ) {
-          temp = (rotate_left(A,5) + (B ^ C ^ D) + E + W[i] + 0xCA62C1D6) & 0x0ffffffff;
-          E = D;
-          D = C;
-          C = rotate_left(B,30);
-          B = A;
-          A = temp;
-      }
-      H0 = (H0 + A) & 0x0ffffffff;
-      H1 = (H1 + B) & 0x0ffffffff;
-      H2 = (H2 + C) & 0x0ffffffff;
-      H3 = (H3 + D) & 0x0ffffffff;
-      H4 = (H4 + E) & 0x0ffffffff;
-  }
-  temp = cvt_hex(H0) + cvt_hex(H1) + cvt_hex(H2) + cvt_hex(H3) + cvt_hex(H4);
-
-  return temp.toLowerCase();
 }

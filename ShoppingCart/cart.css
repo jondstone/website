@@ -256,30 +256,28 @@
     }
 }
 /*Stripe Elements CSS*/
-.StripeElement {
-  background-color: white;
-  height: 20px;
-  padding: 5px 5px;
-  border-radius: 4px;
-  border: 1px solid transparent;
-  box-shadow: 0 1px 3px 0 #e6ebf1;
-  -webkit-transition: box-shadow 150ms ease;
-  transition: box-shadow 150ms ease;
+#checkout,
+#checkout * {
+    box-sizing: border-box;
 }
-.StripeElement--focus {
-  box-shadow: 0 1px 3px 0 #cfd7df;
+.form-row {
+    position: static !important;
+    height: auto !important;
+    overflow: visible !important;
 }
-.StripeElement--invalid {
-  border-color: #fa755a;
+#payment-element {
+    display: block;
+    position: static !important;
+    height: auto !important;
+    overflow: visible !important;
+    background: #ebedef;
+    font-family: sans-serif;
 }
-.StripeElement--webkit-autofill {
-  background-color: #fefde5 !important;
+#payment-element > * {
+    position: static !important;
 }
-/* Stripe Error Message (error.php) */
-.stripeErrorMessage {
-    display: inline;
-    letter-spacing: -1px;
-	font-weight: bold;
-	font-family: 'Oswald', sans-serif;
-    color: rgb(94,0,14);  
+#payButton,
+.privacyPolicy {
+    position: relative;
+    z-index: 10;
 }

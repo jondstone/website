@@ -2,8 +2,8 @@
 <html lang="en-US">
 <head>
 	<title>Jon Stone Photography | Shopping Cart </title>
-    <link rel='stylesheet' href='./../css/cart.css' type='text/css' media='all' />
-    <?php include "./../scripts/header.html" ?>
+    <link rel='stylesheet' href='/css/cart.css' type='text/css' media='all' />
+    <?php include $_SERVER['DOCUMENT_ROOT'] . "/scripts/header.html"; ?>
 </head>
 
 <body>
@@ -11,7 +11,7 @@
         Javascript is currently disabled. This site requires Javascript to be enabled.
     </noscript>
 
-    <?php include "./../scripts/header.txt" ?>	
+    <?php include $_SERVER['DOCUMENT_ROOT'] . "/scripts/header.txt"; ?>
 
 	<div id="content">
         <div id="cartContainer">
@@ -26,9 +26,8 @@
                 <hr>
                 
                 <form id="checkout" method="post" action="charge.php">
-                    <input name="_token" value="SieNmuKUDLLfmVqdUK90fpLUVVyX2npLnmFKg7Py" type="hidden">
+                     <input name="_token" value="" type="hidden">
                     <input id="cartItems" name="cartItems" type="hidden">
-                    <input id="discountExist" name="discountExist" type="hidden">
                     <input id="totalAmount" name="totalAmount" type="hidden">
                     <input type="text" class="formInputField" id="firstName" value="" name="firstName" placeholder="First Name">
                     <input type="text" class="formInputField" id="lastName" value="" name="lastName" placeholder="Last Name">
@@ -40,18 +39,18 @@
                     <input type="text" class="formInputField" id="notes" value="" name="Notes" placeholder="Order Notes">
                     <input type="text" class="formInputField" id="discountCode" value="" name="discountCode" placeholder="Discount Code">
                     <br />
-                    <p class="stripeInfo">Payments are securely handled and stored by Stripe for your protection.</p>
-                    <br />
+                    <p class="stripeInfo">All payments are securely handled by Stripe for your protection.</p>
+                    <br /><br />
                     <div class="form-row">
-                        <!-- Stripe Element inserted here. -->
-                        <div id="cardElement"></div>
-                        <!-- Used to display Card errors from Stripe. -->
-                        <div id="cardErrors" role="alert"></div>
+                        <div id="payment-element"></div>
+                        <div id="payment-message" role="alert"></div>
                     </div>
                     <br />
-                    <input id="payButton" class="btn btnPayOrder" type="submit" onclick="return payButtonClicked();" value="">
+                    <button type="submit" id="payButton" class="btn btnPayOrder">
+                        <span id="payButtonText"></span>
+                    </button>
                     <br /><br />
-                    <p class="privacyPolicy"><a target="_blank" href="privacypolicy.php">Privacy Policy</a></p>
+                    <p class="privacyPolicy"><a target="_blank" href="/../info/privacypolicy.php">Privacy Policy</a></p>
                 </form>
             </div>
 
@@ -72,11 +71,9 @@
         </div>
 	</div>
    
-    <script src="./../scripts/charge.js"></script>
-    
-	<div id="footer">
-		<?php include "./../scripts/footer.txt" ?>
-	</div>
+    <script src="/scripts/charge.js"></script>
+
+	<?php include $_SERVER['DOCUMENT_ROOT'] . "/scripts/footer.txt"; ?>
 
 </body>
 </html>
