@@ -1,94 +1,97 @@
-# This repo contains selected code I've written for my photography and documentary website
+### Inside this repository contains selected projects and working files I built for my photography and documentary website.  
+[www.jondstone.com](https://www.jondstone.com)
 
-### Each Folder will contain a sub-project, with more to be added in the future.
-* ContactForm (Folder contains PHP and JS code for the Contact Form and Validation)
-* MiniGallery (Folder contains PHP and JS code for MiniGallery used on the Real Estate and Weddings pages)
-* Misc (Folder contains Misc. PHP and JS code used throughout my website)
-* PhotoGallery (contains PHP, JS and CSS code for the Photo Gallery portion of my website)
-* Search (contains PHP, JS, and CSS code for my website's sesrch engine)
-* ShoppingCart (This folder contains code I've written for a custom built shopping cart and checkout feature.)
-* UrbexGallery (Folder contains PHP and JS code for the Gallery used throughout the Urban Exploration pages)
----------------------------------------
+- **/Comments/**  
+  Custom built PHP commenting system used across the Urban Exploration pages.
 
-# 2019 Design:
-Starting in late 2018 through early 2019, I undertook a complete overhaul of my website, merging two older sites — **Jon Stone Photography** and **Forgotten Southeast** — into a single cohesive site. This new website was entirely hand-coded, with no templates used at any stage.
+- **/ContactForm/**  
+  PHP and JavaScript code for the site contact form and validation logic.
 
-## Key Highlights
+- **/MiniGallery/**  
+  PHP and JavaScript code for the MiniGallery used on Real Estate and Weddings pages.
 
-### Custom Coding
-- Thousands of lines of **PHP**, **JavaScript**, **HTML**, and **CSS** were meticulously written by hand.
-- Existing JavaScript for the **Photo Galleries** in the Urban Exploring section was refactored for better performance, and images were optimized for faster loading times.
+- **/Misc/**  
+  Miscellaneous PHP and JavaScript utilities used throughout the site.
 
-### New Photo Gallery for Sale Items
-- Created a new gallery dedicated to displaying photos available for purchase.
-- Each photo page includes:
-  - A **description** of the image.
-  - An **interactive map** (powered by Google Maps API, limited to my domain) showing the approximate location of the photo.
-  - **Dynamic shopping cart functionality** allowing users to select size, finish, and other options before adding items to the cart.
+- **/PhotoGallery/**  
+  PHP, JavaScript, and CSS powering the primary photo portfolio pages.
 
-### Enhanced E-Commerce System
-- Transitioned from the 2011 implementation that relied on static PayPal "Add to Cart" buttons:
-  - The old system required unique buttons for each page and lacked dynamic selection capabilities.
-- Introduced a **single dynamic file** using JavaScript and PHP:
-  - Users can dynamically select styles, finishes, and sizes via dropdown menus.
-  - Updates to pricing or options are managed in one file, simplifying maintenance.
-- Checkout process:
-  - Custom-built checkout page where users:
-    - Review their cart.
-    - Apply discount codes.
-    - Enter payment information securely handled by **Stripe's API**.
-  - Orders are generated seamlessly upon payment completion.
+- **/Search/**  
+  PHP, JavaScript, and CSS for the custom built site search engine.
 
-### Security and Analytics
-- **Data Sanitization**: All user input is sanitized before processing to protect against XSS and other malicious attacks.
-- **Security Enhancements**: Implemented robust security headers for additional protection.
-- **Google Analytics**: Added to provide insights into website usage and user behavior.
+- **/ShoppingCart/**  
+  Custom shopping cart and checkout system with Stripe integration.
 
-This overhaul has resulted in a faster, more secure, and feature-rich platform that is easier to maintain and provides a better user experience. All of these enhancements were designed and implemented with the goal of creating a modern, functional website while retaining full control over its features and design.
+- **/UrbexGallery/**  
+  PHP and JavaScript photo gallery used throughout the Urban Exploration pages.
 
----------------------------------------
+## All Changes Made
 
-# 2024 Update:
-In 2024, I focused on modernizing and optimizing my website by refactoring all JavaScript into vanilla JS to improve performance and remove external dependencies, enhancing the contact form to combat spam bots, refining CSS for clarity and a modern aesthetic, making several pages mobile-friendly, and streamlining PHP code for efficiency and readability.
+### Initial Site Redesign (2019)
 
-## Key Highlights
+1. **Full Website Overhaul**
+   - Merged *Jon Stone Photography* and *Forgotten Southeast* into a single site.
+   - Entire site hand-coded with no templates.
 
-### Refactored JavaScript
-- All JavaScript has been rewritten in **vanilla JS**, eliminating the need for **Bootstrap** and **jQuery**.
-  - This reduces file sizes, improves loading times, and removes dependency on external libraries.
-  - Major rewrites include:
-    - **Shopping cart functionality**.
-    - **Photo gallery pages**.
-    - **Urban exploration gallery pages**.
-    - Various other components across the website.
+2. **Custom Development**
+   - Thousands of lines of PHP, JavaScript, HTML, and CSS rewritten.
+   - Refactored Urban Exploration gallery JavaScript for performance.
+   - Image assets optimized for faster load times.
 
-### Contact Form Improvements
-- Updated the contact form to mitigate spam bots, resulting in no spam submissions and improved communication reliability.
+3. **Photo Gallery**
+   - New gallery dedicated to photos available for purchase.
+   - Individual photo pages include descriptions, interactive Google Maps integration, and dynamic add-to-cart options.
 
-### CSS Refinements
-- Refactored parts of the CSS:
-  - Removed unnecessary styles.
-  - Renamed fields for better clarity.
-  - Added a "modern flair" to previously outdated pages.
-  - All pages are now **mobile-friendly**, improving usability on smaller screens like tablets and cellphones
+4. **E-Commerce System**
+   - Replaced static PayPal buttons with a dynamic PHP/JavaScript driven checkout.
+   - Centralized pricing and option management.
+   - Custom checkout flow utilizig Stripe payment processing.
 
-### PHP Optimization
-- Cleaned up and refactored all PHP code:
-  - Reduced redundant or unnecessary code.
-  - Added comments for better readability and maintainability.
+5. **Security and Analytics**
+   - Input sanitization for all user-submitted data.
+   - Security headers implemented site-wide.
+   - Google Analytics integration.
 
----------------------------------------
+### Modernization and Optimization (2024)
 
-# 2025 Update:
-In 2025, I finished developing my own search engine algorithm; completing multiple cycles of iteration and testing to finalize the crawler, sorting, and ranking systems, as well as the front-end page design.
+1. **JavaScript Refactor**
+   - Complete rewrite to vanilla JavaScript.
+   - Removed Bootstrap and jQuery dependencies.
+   - Major rewrites for shopping cart, photo galleries, and Urbex galleries.
 
-Additionally, I designed and implemented a new menu and footer, along with various small visual updates to refresh the look and feel of the site.
+2. **Contact Form Hardening**
+   - Improved bot mitigation.
+   - Eliminated spam submissions.
 
----------------------------------------
+3. **CSS Cleanup**
+   - Removed unused styles.
+   - Renamed selectors for clarity.
+   - Updated visual presentation.
+   - All pages made mobile-friendly.
 
-## TODO
+4. **PHP Refactor**
+   - Removed redundant logic.
+   - Improved structure and readability.
 
-### 2026
-- Update checkout pages:
-  - Resolve issue where the shopping cart fails to clear items after a successful checkout and payment.
-- Replace **Disqus** with a custom-built **commenting system** for the urban exploration pages.
+### Search and UI Expansion (2025)
+
+1. **Custom Search Engine**
+   - Designed and implemented a custom crawler.
+   - Built a ranking and sorting algorithm.
+   - Iterative testing to refine relevance.
+   - Custom front-end search UI.
+
+2. **Header and Footer Redesign**
+   - New navigation system for desktop and mobile.
+   - Cleaner structure and more modern appearance than the 2019 design.
+
+### Platform Consolidation (2026)
+
+1. **Shopping Cart Checkout**
+   - Migrated legacy Stripe code to their new Payment Intents API.
+   - Fixed legacy bug preventing cart clearing after successful checkout.
+
+2. **Custom Comment System**
+   - Replaced Disqus, removing the last third-party frontend dependency, and reducing page load overhead by eliminating their assets.
+   - Full control over moderation, security, and UI.
+   - Introduced a modern, lightweight commenting system tailored to the site.
