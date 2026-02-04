@@ -1,0 +1,242 @@
+#ugc-comments {
+  font-family: sans-serif;
+  color: #1a1a1a;
+  max-width: 980px;
+  margin: 32px auto;
+}
+.ugc-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+.ugc-title {
+  font-weight: 600;
+  font-size: 16px;
+  font-family: 'Oswald';
+}
+.ugc-sort {
+    font-size: 13px;
+    user-select: none;
+}
+.ugc-sort button {
+    background: transparent;
+    border: 0;
+    color: #6b6b6b;
+    cursor: pointer;
+    font-family: 'Oswald';
+}
+.ugc-sort button.active {
+    color: rgb(94, 0, 14);
+    background: #f1f1f1;
+}
+.ugc-hr {
+  border: 0;
+  border-top: 1px solid #dedede;
+  margin: 10px 0 18px;
+}
+.ugc-compose {
+  margin-bottom: 18px;
+}
+.ugc-compose-box {
+  background: #fff;
+  border: 1px solid #dedede;
+  border-radius: 10px;
+  padding: 14px 14px 12px;
+}
+.ugc-compose-box textarea {
+  width: 100%;
+  min-height: 54px;
+  resize: vertical;
+  border: 0;
+  outline: none;
+  font-size: 14px;
+}
+.ugc-compose-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+.ugc-compose-row #ugc-name {
+  flex: 0 0 auto;
+  width: 220px;
+  border: 1px solid #dedede;
+  border-radius: 8px;
+  padding: 10px 10px;
+  font-size: 14px;
+  outline: none;
+  font-family: monospace;
+}
+.ugc-compose button {
+  border: 1px solid #2b3150;
+  background: #2b3150;
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  font-family: 'Oswald';
+  text-transform: uppercase;
+}
+.ugc-compose button:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+}
+#ugc-compose-msg,
+.ugc-reply-msg {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ugc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.ugc-item {
+  display: flex;
+  gap: 12px;
+}
+.ugc-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex: 0 0 40px;
+}
+.ugc-body {
+  flex: 1;
+  min-width: 0;
+}
+.ugc-meta {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+.ugc-name {
+  font-weight: 600;
+  font-size: 14px;
+}
+.ugc-time {
+  color: #7a7a7a;
+  font-size: 12px;
+}
+.ugc-text {
+  font-size: 14px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  letter-spacing: .3px;
+}
+.ugc-actions {
+  display: flex;
+  gap: 14px;
+  margin-top: 8px;
+  align-items: center;
+  color: #6b6b6b;
+  font-size: 13px;
+}
+.ugc-action {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+.ugc-action button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  color: inherit;
+  font-size: 13px;
+}
+.ugc-replies {
+  margin-top: 12px;
+  padding-left: 52px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ugc-replybox {
+  margin-top: 10px;
+}
+.ugc-replybox-box {
+  border: 1px solid #dedede;
+  border-radius: 10px;
+  padding: 12px;
+  background: #fafafa;
+}
+.ugc-replybox-box textarea {
+  width: 100%;
+  min-height: 46px;
+  resize: vertical;
+  border: 0;
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+}
+.ugc-replybox-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+.ugc-replybox-row input {
+  flex: 0 0 auto;
+  width: 220px;
+  border: 1px solid #dedede;
+  border-radius: 8px;
+  padding: 9px 10px;
+  font-size: 14px;
+  outline: none;
+  background: #fff;
+  font-family: monospace;
+}
+.ugc-replybox button {
+  border: 1px solid #2b3150;
+  background: #2b3150;
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  font-family: 'Oswald';
+  text-transform: uppercase;
+}
+.ugc-muted {
+  color: #7a7a7a;
+}
+.ugc-like.liked {
+  color: #ff0000;
+}
+
+/* MOBILE ONLY FIXES */
+@media (max-width: 640px) {
+  .ugc-compose-row,
+  .ugc-replybox-row {
+    flex-wrap: wrap;
+  }
+  #ugc-name,
+  .ugc-replybox-row input {
+    width: 100%;
+  }
+  #ugc-compose-msg,
+  .ugc-reply-msg {
+    flex: 1 1 100%;
+    white-space: normal;
+    overflow: visible;
+  }
+  .ugc-replybox-box textarea {
+    min-height: 80px;
+  }
+}
